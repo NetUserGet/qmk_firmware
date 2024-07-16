@@ -136,6 +136,7 @@
     "rgb_matrix": {
         "driver": "sn32f24xb",
         "animations": {
+            "multisplash": true,
             "breathing": true,
             "band_spiral_val": true,
             "cycle_all": true,
@@ -155,7 +156,6 @@
             "solid_reactive_simple": true,
             "solid_reactive_multiwide": true,
             "solid_reactive_multinexus": true,
-            "splash": true,
             "solid_splash": true
         },
         "layout": [
