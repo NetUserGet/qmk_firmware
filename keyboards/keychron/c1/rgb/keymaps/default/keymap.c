@@ -20,15 +20,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // The underscores don't mean anything - you can have a layer called STUFF or any other name.
 // Layer names don't all need to be of the same length, obviously, and you can also skip them
 // entirely and just use numbers.
-
-enum MAC_LAYERS {
-    MAC_BASE = 0,
-    MAC_FN,
+enum WIN_LAYERS {
+    WIN_BASE = 0,
+    WIN_FN,
 };
 
-enum WIN_LAYERS {
-    WIN_BASE = 2,
-    WIN_FN,
+enum MAC_LAYERS {
+    MAC_BASE = WIN_FN + 1,
+    MAC_FN,
 };
 
 #define KC_TASK LGUI(KC_TAB)        // Task viewer

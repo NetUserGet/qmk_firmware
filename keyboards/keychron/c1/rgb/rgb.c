@@ -18,14 +18,14 @@
 
 bool mode_leds_show = true;
 
-enum MAC_LAYERS {
-    MAC_BASE = 0,
-    MAC_FN,
+enum WIN_LAYERS {
+    WIN_BASE = 0,
+    WIN_FN,
 };
 
-enum WIN_LAYERS {
-    WIN_BASE = 2,
-    WIN_FN,
+enum MAC_LAYERS {
+    MAC_BASE = WIN_FN + 1,
+    MAC_FN,
 }; /* Taken from the default keymap for readability */
 
 #ifdef DIP_SWITCH_ENABLE
@@ -44,9 +44,9 @@ enum WIN_LAYERS {
         if (index == 0) {
             if (active) {
                 /* ternary operators are hard for some to consive in their mind  */
-                set_single_persistent_default_layer(WIN_BASE); /* default layer switch*/
+                layer_state_set(0x0C); /* https://docs.qmk.fm/keymap#keymap-and-layers for more information */
             }
-            set_single_persistent_default_layer(MAC_BASE);
+            layer_state_set(0x03);
         }
 
         mode_leds_update();
@@ -66,14 +66,16 @@ enum WIN_LAYERS {
         // Turn leds off
         mode_leds_show = false;
         mode_leds_update();
-
+        #ifdef RGB_MATRIX
         rgb_matrix_set_suspend_state(true);
+        #endif
     }
 
     void suspend_wakeup_init_kb(void) {
         mode_leds_show = true;
         mode_leds_update();
-
+        #ifdef RGB_MATRIX
         rgb_matrix_set_suspend_state(false);
+        #endif
     }
 #endif // RGB_MATRIX_SLEEP
