@@ -114,14 +114,14 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
     case LAYER_SWITCH:
       if (record->event.pressed) {
-        layer_state_set(0x0C);
+        layer_state_set(0x0000000C);
       } else {
         // nop
       }
       return false; // Skip all further processing of this key
     case LAYER_SWITCH_BACK:
       if (record->event.pressed) {
-        layer_state_set(0x03);
+        layer_state_set(0x00000003);
       } else {
         // nop
       }

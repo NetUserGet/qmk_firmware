@@ -44,9 +44,9 @@ enum MAC_LAYERS {
         if (index == 0) {
             if (active) {
                 /* ternary operators are hard for some to consive in their mind  */
-                layer_state_set(0x0C); /* https://docs.qmk.fm/keymap#keymap-and-layers for more information */
+                layer_state_set(0x0000000C); /* https://docs.qmk.fm/keymap#keymap-and-layers for more information */
             }
-            layer_state_set(0x03);
+            layer_state_set(0x00000003);
         }
 
         mode_leds_update();
