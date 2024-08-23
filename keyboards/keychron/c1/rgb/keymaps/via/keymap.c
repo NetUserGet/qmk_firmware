@@ -20,12 +20,19 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // The underscores don't mean anything - you can have a layer called STUFF or any other name.
 // Layer names don't all need to be of the same length, obviously, and you can also skip them
 // entirely and just use numbers.
-
-enum layer_names {
-    WIN_BASE,
-    WIN_FN,
-    MAC_BASE,
+enum MAC_LAYERS {
+    MAC_BASE = 0,
     MAC_FN,
+};
+
+enum WIN_LAYERS {
+    WIN_BASE = 2,
+    WIN_FN,
+};
+
+enum custom_key {
+    LAYER_SWITCH = SAFE_RANGE,
+    LAYER_SWITCH_BACK
 };
 
 #define KC_TASK LGUI(KC_TAB)        // Task viewer
@@ -64,7 +71,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [WIN_FN] = LAYOUT_tkl_ansi(
         QK_BOOT,  KC_BRID,  KC_BRIU,  KC_TASK,  KC_FLXP,  RGB_VAD,  RGB_VAI,  KC_MPRV,  KC_MPLY,  KC_MNXT,  KC_MUTE,  KC_VOLD,  KC_VOLU,            KC_SNIP,  _______,  RGB_TOG,
-        _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,
+        LAYER_SWITCH,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,
         _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,
         _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,            _______,
         _______,            _______,  _______,  _______,  _______,  QK_RBT,   _______,  _______,  _______,  _______,  _______,            _______,            RGB_HUI,
@@ -95,7 +102,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [MAC_FN] = LAYOUT_tkl_ansi(
         QK_BOOT,  KC_BRID,  KC_BRIU,  KC_MSSN,  KC_FIND,  RGB_VAD,  RGB_VAI,  KC_MPRV,  KC_MPLY,  KC_MNXT,  KC_MUTE,  KC_VOLD,  KC_VOLU,            KC_MSNP,  _______,  RGB_TOG,
-        _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,
+        LAYER_SWITCH_BACK,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,
         _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,
         _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,            _______,
         _______,            _______,  _______,  _______,  _______,  QK_RBT,   _______,  _______,  _______,  _______,  _______,            _______,            RGB_HUI,
@@ -103,4 +110,23 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 };
 
-
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+  switch (keycode) {
+    case LAYER_SWITCH:
+      if (record->event.pressed) {
+        set_single_persistent_default_layer(MAC_BASE); /* toggles off the mac layer */
+      } else {
+        // nop
+      }
+      return false; // Skip all further processing of this key
+    case LAYER_SWITCH_BACK:
+      if (record->event.pressed) {
+        set_single_persistent_default_layer(WIN_BASE); /* toggles off the win layer */
+      } else {
+        // nop
+      }
+      return false; // Skip all further processing of this key
+    default:
+      return false;
+  }
+}

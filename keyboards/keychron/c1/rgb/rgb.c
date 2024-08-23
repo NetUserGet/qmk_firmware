@@ -18,11 +18,14 @@
 
 bool mode_leds_show = true;
 
-enum layer_names {
-    WIN_BASE,
-    WIN_FN,
-    MAC_BASE,
+enum MAC_LAYERS {
+    MAC_BASE = 0,
     MAC_FN,
+};
+
+enum WIN_LAYERS {
+    WIN_BASE = 2,
+    WIN_FN,
 }; /* Taken from the default keymap for readability */
 
 #ifdef DIP_SWITCH_ENABLE
@@ -39,7 +42,11 @@ enum layer_names {
             return false;
         }
         if (index == 0) {
-            default_layer_set(active ? MAC_BASE : WIN_BASE);
+            if (active) {
+                /* ternary operators are hard for some to consive in their mind  */
+                set_single_persistent_default_layer(WIN_BASE); /* default layer switch*/
+            }
+            set_single_persistent_default_layer(MAC_BASE);
         }
 
         mode_leds_update();

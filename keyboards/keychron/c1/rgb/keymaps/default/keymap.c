@@ -21,11 +21,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // Layer names don't all need to be of the same length, obviously, and you can also skip them
 // entirely and just use numbers.
 
-enum layer_names {
-    WIN_BASE,
-    WIN_FN,
-    MAC_BASE,
+enum MAC_LAYERS {
+    MAC_BASE = 0,
     MAC_FN,
+};
+
+enum WIN_LAYERS {
+    WIN_BASE = 2,
+    WIN_FN,
 };
 
 #define KC_TASK LGUI(KC_TAB)        // Task viewer
