@@ -8,15 +8,13 @@
         "bootmagic": true,
         "command": false,
         "console": false,
-        "extrakey": false,
+        "extrakey": true,
         "mousekey": false,
         "nkro": true,
         "rgb_matrix": true,
         "dip_switch": true
     },
-    "bootmagic": {
-        "matrix": [0, 0]
-    },
+    "bootloader_instructions": "Hold FN + ESC",
     "indicators": {
         "caps_lock": "B10"
     },
