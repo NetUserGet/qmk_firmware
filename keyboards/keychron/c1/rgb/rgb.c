@@ -54,18 +54,6 @@ void keyboard_post_init_kb(void) {
     default_layer_state_set_kb(1 << _WIN_BASE); /* set layer 0 to be on */
 }
 
-/* pretty hacky code to try to get bootmagic to work */
-void bootmagic_scan(void) {
-    matrix_scan();
-    wait_ms(10);
-    matrix_scan();
-
-    if (matrix_get_row(BOOTMAGIC_ROW) & (1 << BOOTMAGIC_COLUMN)) {
-      // Jump to bootloader.
-      bootloader_jump();
-    }
-}
-
 #ifdef RGB_MATRIX_SLEEP
     void suspend_power_down_kb(void) {
         // Turn leds off
