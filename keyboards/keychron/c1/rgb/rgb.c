@@ -18,48 +18,51 @@
 
 bool mode_leds_show = true;
 
-enum WIN_LAYERS {
-    WIN_BASE = 0,
-    WIN_FN,
-};
-
-enum MAC_LAYERS {
-    MAC_BASE = WIN_FN + 1,
-    MAC_FN,
-}; /* Taken from the default keymap for readability */
-
 #ifdef DIP_SWITCH_ENABLE
     static void mode_leds_update(void){
-        if (mode_leds_show && layer_state_is(WIN_BASE)) {
+        if (mode_leds_show && layer_state_is(_WIN_BASE)) {
             gpio_write_pin_high(LED_WIN_PIN);
-        } else if (mode_leds_show && layer_state_is(MAC_BASE)) {
+        } else if (mode_leds_show && layer_state_is(_MAC_BASE)) {
             gpio_write_pin_high(LED_MAC_PIN);
         }
     }
-
     bool dip_switch_update_kb(uint8_t index, bool active) {
         if (!dip_switch_update_user(index, active)) {
             return false;
         }
         if (index == 0) {
             if (active) {
-                /* ternary operators are hard for some to consive in their mind  */
-                layer_state_set(0x0000000C); /* https://docs.qmk.fm/keymap#keymap-and-layers for more information */
+                default_layer_state_set_kb(_MAC_BASE); /* set layer 3 to be on */
             }
-            layer_state_set(0x00000003);
         }
-
         mode_leds_update();
         return true;
     }
-
-    void keyboard_pre_init_kb(void) {
-        // Setup Win & Mac LED Pins as output
-        gpio_set_pin_output(LED_WIN_PIN);
-        gpio_set_pin_output(LED_MAC_PIN);
-    }
 #endif // DIP_SWITCH_ENABLE
 
+
+void keyboard_pre_init_kb(void) {
+    // Setup Win & Mac LED Pins as output
+    gpio_set_pin_output(LED_WIN_PIN);
+    gpio_set_pin_output(LED_MAC_PIN);
+}
+
+void keyboard_post_init_kb(void) {
+    // Setup Default Keymap.
+    default_layer_state_set_kb(_WIN_BASE); /* set layer 0 to be on */
+}
+
+/* pretty hacky code to try to get bootmagic to work */
+void bootmagic_scan(void) {
+    matrix_scan();
+    wait_ms(10);
+    matrix_scan();
+
+    if (matrix_get_row(BOOTMAGIC_ROW) & (1 << BOOTMAGIC_COLUMN)) {
+      // Jump to bootloader.
+      bootloader_jump();
+    }
+}
 
 #ifdef RGB_MATRIX_SLEEP
     void suspend_power_down_kb(void) {

@@ -30,5 +30,7 @@
     },
     "clangd.arguments": [
         "--header-insertion=never"
-    ]
+    ],
+    "makefile.makePath": "C:\\msys64\\usr\\bin\\make.exe",
+    "makefile.buildLog": ""
 }
