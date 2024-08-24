@@ -32,7 +32,7 @@ bool mode_leds_show = true;
         }
         if (index == 0) {
             if (active) {
-                default_layer_state_set_kb(_MAC_BASE); /* set layer 3 to be on */
+                default_layer_state_set_kb(1 << _MAC_BASE); /* set layer 2 to be on */
             }
         }
         mode_leds_update();
@@ -49,7 +49,9 @@ void keyboard_pre_init_kb(void) {
 
 void keyboard_post_init_kb(void) {
     // Setup Default Keymap.
-    default_layer_state_set_kb(_WIN_BASE); /* set layer 0 to be on */
+    // If you chose to not have the dipswich enabled change this _WIN_BASE to be your default keymap.
+    // Eg: _MAC_BASE
+    default_layer_state_set_kb(1 << _WIN_BASE); /* set layer 0 to be on */
 }
 
 /* pretty hacky code to try to get bootmagic to work */
