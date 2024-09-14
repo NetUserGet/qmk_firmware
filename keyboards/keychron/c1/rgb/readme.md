@@ -26,11 +26,7 @@ Flashing example for this keyboard:
 # Keymapping
 ### Windows Mode
 
-> [!IMPORTANT]
-> For developers:
-> Layers are made in config.h and used wherever seen fit.
-> Sorry if there is poor quailty in the code. 
-> if something brakes contact nuggetnet on discord for any issues or problems.
+
 
 <details>
 
