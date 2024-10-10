@@ -25,9 +25,6 @@ Flashing example for this keyboard:
 * * *
 # Keymapping
 ### Windows Mode
-
-
-
 <details>
 
 Without Fn | With Fn

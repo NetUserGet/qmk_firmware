@@ -63,7 +63,7 @@
             "splash" : true,
             "typing_heatmap" : true,
         },
-        "driver": "sn32f24xb",
+        "driver": "sn32f2xx",
         "react_on_keyup": true,
         "sleep": true
     },
@@ -76,7 +76,6 @@
     },
     "usb": {
         "vid": "0x3434",
-        "device_version": "1.0.0",
-        "wait_for": false
+        "device_version": "1.0.0"
     }
 }

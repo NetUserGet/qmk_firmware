@@ -9,7 +9,7 @@
         "command": false,
         "console": false,
         "extrakey": true,
-        "mousekey": false,
+        "mousekey": true,
         "nkro": true,
         "rgb_matrix": true,
         "dip_switch": true
@@ -152,6 +152,7 @@
             "solid_reactive_simple": true,
             "solid_reactive_multiwide": true,
             "solid_reactive_multinexus": true,
+            "splash": true,
             "solid_splash": true
         },
         "layout": [

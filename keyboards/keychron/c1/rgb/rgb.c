@@ -18,6 +18,7 @@
 
 bool mode_leds_show = true;
 
+
 #ifdef DIP_SWITCH_ENABLE
     static void mode_leds_update(void){
         if (mode_leds_show && layer_state_is(_WIN_BASE)) {
@@ -54,14 +55,17 @@ void keyboard_post_init_kb(void) {
     default_layer_state_set_kb(1 << _WIN_BASE); /* set layer 0 to be on */
 }
 
+
 #ifdef RGB_MATRIX_SLEEP
     void suspend_power_down_kb(void) {
         // Turn leds off
         mode_leds_show = false;
         mode_leds_update();
+      
         #ifdef RGB_MATRIX
         rgb_matrix_set_suspend_state(true);
         #endif
+    
     }
 
     void suspend_wakeup_init_kb(void) {

@@ -16,3 +16,4 @@
 
 #pragma once
 #define DYNAMIC_KEYMAP_LAYER_COUNT 3
+#define USB_DEFAULT_BUFFER_CAPACITY 2
